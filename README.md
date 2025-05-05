@@ -10,6 +10,7 @@ This project demonstrates how to build, containerize, and deploy a simple Flask-
 - ⚙️ Kubernetes Deployment, Service, and Ingress  
 - 🧪 Local testing with Minikube (Docker driver)  
 - 🧼 Clean production-style YAML configs  
+- 📦 Helm chart support for reusable deployments
 
 ---
 
@@ -36,17 +37,11 @@ docker build -t user-service:latest .
 
 ---
 
-### 3. Apply Kubernetes Resources
+### 3. Deploy with Helm
 
 ```bash
-kubectl apply -f k8s/
+helm install user-service ./user-chart
 ```
-
-This includes:
-
-- `deployment.yaml`: Runs the Flask app in a pod  
-- `service.yaml`: Exposes the app internally via ClusterIP  
-- `ingress.yaml`: Routes HTTP requests to the service  
 
 ---
 
@@ -111,10 +106,14 @@ flask-k8s-app/
 │       ├── app.py
 │       ├── Dockerfile
 │       ├── requirements.txt
-│       └── k8s/
-│           ├── deployment.yaml
-│           ├── service.yaml
-│           └── ingress.yaml
+│       └── k8s/ (legacy YAMLs)
+├── user-chart/
+│   ├── Chart.yaml
+│   ├── values.yaml
+│   └── templates/
+│       ├── deployment.yaml
+│       ├── service.yaml
+│       └── ingress.yaml
 ├── README.md
 └── .gitignore
 ```
@@ -123,10 +122,13 @@ flask-k8s-app/
 
 ## 🪜 Next Steps
 
-✅ Add a second service (e.g., auth or data API)  
 ✅ Use Helm to package and template resources  
-🔐 Add Kubernetes secrets or ConfigMaps  
-📦 Push to GitHub with a public portfolio-ready commit history  
+⬜ Deploy to GKE using Helm  
+⬜ Push Docker image to GitHub Container Registry (GHCR)  
+⬜ Add a second service (e.g., auth or data API)  
+⬜ Add Kubernetes secrets or ConfigMaps  
+⬜ Implement HorizontalPodAutoscaler (HPA)  
+📦 Push to GitHub with a public portfolio-ready commit history
 
 ---
 
@@ -135,6 +137,7 @@ flask-k8s-app/
 - [Minikube Networking Docs](https://minikube.sigs.k8s.io/docs/handbook/accessing/)
 - [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
 - [Gunicorn Docs](https://docs.gunicorn.org/en/stable/)
+- [Helm Docs](https://helm.sh/docs/)
 
 ---
 
