@@ -1,15 +1,15 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: user-service-ingress
+  name: {{ .Release.Name }}-ingress
 spec:
   rules:
     - http:
         paths:
-          - path: /ping
+          - path: {{ .Values.ingress.path }}
             pathType: Prefix
             backend:
               service:
-                name: user-service
+                name: {{ .Release.Name }}
                 port:
-                  number: 80
+                  number: {{ .Values.service.port }}
