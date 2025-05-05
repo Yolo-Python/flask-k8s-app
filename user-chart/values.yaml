@@ -1,12 +1,12 @@
 replicaCount: 1
 
 image:
-  repository: user-service
+  repository: yolopython/user-service
   tag: latest
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: ClusterIP # Use LoadBalancer for GKE
   port: 80
   targetPort: 5000
 
