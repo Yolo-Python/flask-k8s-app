@@ -85,6 +85,18 @@ Both approaches bypass Ingress and allow testing even when direct IP access fail
 
 ---
 
+## 🌐 Accessing the App on GKE
+
+By default, the Helm chart uses a ClusterIP service type, which is not externally accessible in GKE.
+To expose the service with an external IP, override the service.type during installation:
+
+```bash
+helm install user-service ./user-chart --set service.type=LoadBalancer
+```
+This change is necessary for the app to be reachable via a public URL in GKE.
+
+---
+
 ## 🧠 Architecture Overview
 
 ```
@@ -123,8 +135,8 @@ flask-k8s-app/
 ## 🪜 Next Steps
 
 ✅ Use Helm to package and template resources  
-⬜ Deploy to GKE using Helm  
-⬜ Push Docker image to GitHub Container Registry (GHCR)  
+✅ Push Docker image to Docker Hub  
+✅ Deploy to GKE using Helm  
 ⬜ Add a second service (e.g., auth or data API)  
 ⬜ Add Kubernetes secrets or ConfigMaps  
 ⬜ Implement HorizontalPodAutoscaler (HPA)  
